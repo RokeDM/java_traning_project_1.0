@@ -1,6 +1,7 @@
 package org.javaguru.travel.insurance.core;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +11,15 @@ import org.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 
 public class TravelCalculatePremiumServiceImplAIEachFieldTest {
 
+    private DateTimeService dateTimeService;
+    private TravelCalculatePremiumServiceImpl service;
+
+    @BeforeEach
+    public void setUP() {
+        dateTimeService = new DateTimeService();
+        service = new TravelCalculatePremiumServiceImpl(dateTimeService);
+    }
+
     @Test
     void testCalculatePremium_personFirstName() {
         String firstName = "John";
@@ -18,8 +28,6 @@ public class TravelCalculatePremiumServiceImplAIEachFieldTest {
         request.setPersonLastName("Doe");
         request.setAgreementDateFrom(new Date(125, 0, 1)); // 2025-01-01
         request.setAgreementDateTo(new Date(125, 11, 31)); // 2025-12-31
-
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
@@ -36,8 +44,6 @@ public class TravelCalculatePremiumServiceImplAIEachFieldTest {
         request.setPersonLastName(lastName);
         request.setAgreementDateFrom(new Date(125, 0, 1)); // 2025-01-01
         request.setAgreementDateTo(new Date(125, 11, 31)); // 2025-12-31
-
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
@@ -57,8 +63,6 @@ public class TravelCalculatePremiumServiceImplAIEachFieldTest {
         request.setAgreementDateFrom(dateFrom);
         request.setAgreementDateTo(new Date(125, 11, 31)); // 2025-12-31
 
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
-
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
         assertNotNull(response);
@@ -76,8 +80,6 @@ public class TravelCalculatePremiumServiceImplAIEachFieldTest {
         request.setPersonLastName("Doe");
         request.setAgreementDateFrom(new Date(125, 0, 1)); // 2025-01-01
         request.setAgreementDateTo(dateTo);
-
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
