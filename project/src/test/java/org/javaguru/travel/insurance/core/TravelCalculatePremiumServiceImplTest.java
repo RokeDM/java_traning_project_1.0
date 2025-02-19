@@ -3,20 +3,26 @@ package org.javaguru.travel.insurance.core;
 import org.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TravelCalculatePremiumServiceImplTest {
 
     private DateTimeService dateTimeService;
     private TravelCalculatePremiumServiceImpl service;
+    private TravelCalculatePremiumRequest request;
 
     @BeforeEach
     public void setUP() {
-        dateTimeService = new DateTimeService();
+        request = requestAllFields();
+        dateTimeService = mock(DateTimeService.class);
+        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(0L);
         service = new TravelCalculatePremiumServiceImpl(dateTimeService);
     }
 
