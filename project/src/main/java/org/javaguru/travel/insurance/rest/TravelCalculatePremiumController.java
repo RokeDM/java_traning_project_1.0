@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/insurance/travel")
-@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class TravelCalculatePremiumController {
 
 	private final TravelCalculatePremiumService calculatePremiumService;
+
+	TravelCalculatePremiumController(TravelCalculatePremiumService calculatePremiumService) {
+		this.calculatePremiumService = calculatePremiumService;
+	}
 
 	@PostMapping(path = "/",
 			consumes = "application/json",
