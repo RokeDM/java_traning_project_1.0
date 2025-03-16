@@ -1,7 +1,5 @@
 package org.javaguru.travel.insurance.rest;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import org.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 import org.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
