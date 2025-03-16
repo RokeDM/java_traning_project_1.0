@@ -1,8 +1,175 @@
 
 1. Тест на отсутствие данных в поле personFirstName.
+Request:
+{
+  "personFirstName" : null,
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2021-05-25",
+  "agreementDateTo" : "2021-05-29"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "personFirstName",
+      "message": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
+
 2. Тест на отсутствие данных в поле personLastName.
+Request:
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "null",
+  "agreementDateFrom" : "2021-05-25",
+  "agreementDateTo" : "2021-05-29"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "personLastName",
+      "message": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
+
 3. Тест на отсутствие данных в поле agreementDateFrom.
+Request:
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "null",
+  "agreementDateTo" : "2021-05-29"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "agreementDateFrom",
+      "message": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
+
 4. Тест на отсутствие данных в поле agreementDateTo.
-5. Тест на отсутствие данных во всех полях.
+Request:
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2021-05-25",
+  "agreementDateTo" : "null"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "agreementDateTo",
+      "message": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
+
+5. Тест на отсутствие данных во всех полях, либо ошибки во всех полях.
+Request:
+{
+  "personFirstName" : null,
+  "personLastName" : "null",
+  "agreementDateFrom" : "null",
+  "agreementDateTo" : "null"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "personFirstName",
+      "message": "Must not be empty!"
+    },
+    {
+      "field": "personLastName",
+      "message": "Must not be empty!"
+    },
+    {
+      "field": "agreementDateFrom",
+      "message": "Must not be empty!"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
+
 6. Тест на то, что дата в поле agreementDateFrom меньше даты в поле agreementDateTo.
+Request:
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2021-05-29",
+  "agreementDateTo" : "2021-05-25"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "agreementDateFrom",
+      "message": "Must be less then agreementDateTo!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
+
 7. Тест на то что во всех полях отсутствуют ошибки.
+Request:
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2021-05-25",
+  "agreementDateTo" : "2021-05-29"
+}
+
+Response:
+ {
+  "errors": null,
+  "personFirstName": "Vasja",
+  "personLastName": "Pupkin",
+  "agreementDateFrom": "2021-05-25",
+  "agreementDateTo": "2021-05-29",
+  "agreementPrice": 4
+}
