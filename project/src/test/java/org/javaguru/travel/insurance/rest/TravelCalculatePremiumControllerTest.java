@@ -30,8 +30,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : null,\n" +
                                 "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "\"agreementDateFrom\" : \"2025-05-25\",\n" +
+                                "\"agreementDateTo\" : \"2025-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -54,8 +54,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : \"Vasja\",\n" +
                                 "\"personLastName\" : null,\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "\"agreementDateFrom\" : \"2025-05-25\",\n" +
+                                "\"agreementDateTo\" : \"2025-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -79,7 +79,7 @@ public class TravelCalculatePremiumControllerTest {
                                 "\"personFirstName\" : \"Vasja\",\n" +
                                 "\"personLastName\" : \"Pupkin\",\n" +
                                 "\"agreementDateFrom\" : null,\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "\"agreementDateTo\" : \"2025-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -102,7 +102,7 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : \"Vasja\",\n" +
                                 "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-21\",\n" +
+                                "\"agreementDateFrom\" : \"2025-05-21\",\n" +
                                 "\"agreementDateTo\" : null\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -148,8 +148,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : \"Vasja\",\n" +
                                 "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-29\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-21\"\n" +
+                                "\"agreementDateFrom\" : \"2025-05-29\",\n" +
+                                "\"agreementDateTo\" : \"2025-05-21\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -172,15 +172,15 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : \"Vasja\",\n" +
                                 "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-21\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "\"agreementDateFrom\" : \"2025-05-21\",\n" +
+                                "\"agreementDateTo\" : \"2025-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is("Vasja")))
                 .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-21")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
+                .andExpect(jsonPath("agreementDateFrom", is("2025-05-21")))
+                .andExpect(jsonPath("agreementDateTo", is("2025-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(8)))
                 .andExpect(jsonPath("errors", is(nullValue())))
                 .andReturn();
