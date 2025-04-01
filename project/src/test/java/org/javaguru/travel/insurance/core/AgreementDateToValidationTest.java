@@ -1,0 +1,46 @@
+package org.javaguru.travel.insurance.core;
+
+import org.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import org.javaguru.travel.insurance.dto.ValidationError;
+import org.junit.jupiter.api.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class AgreementDateToValidationTest {
+
+    private AgreementDateToValidation validation = new AgreementDateToValidation();
+
+    @Test
+    void shouldReturnErrorWhenAgreementDateToIsNull() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getAgreementDateFrom()).thenReturn(null);
+        Optional<ValidationError> errorOpt = validation.validateAgreementDateTo(request);
+        assertEquals(errorOpt.get().getField(), "agreementDateTo");
+        assertEquals(errorOpt.get().getMessage(), "Must not be empty!");
+    }
+
+    @Test
+    void shouldNotReturnErrorWhenAgreementDateToIsPresent() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
+        Optional<ValidationError> errorOpt = validation.validateAgreementDateTo(request);
+        assertTrue(errorOpt.isEmpty());
+    }
+
+    private Date createDate(String dateStr) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
