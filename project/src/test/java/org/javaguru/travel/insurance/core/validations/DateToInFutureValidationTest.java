@@ -32,7 +32,7 @@ class DateToInFutureValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("31.03.2025"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("01.04.2025"));
-        Optional<ValidationError> errorOpt = validation.validateDateToInFuture(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
         assertEquals(errorOpt.get().getField(), "agreementDateTo");
         assertEquals(errorOpt.get().getMessage(), "Must be in the future!");
@@ -43,7 +43,7 @@ class DateToInFutureValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("01.04.2025"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("31.03.2025"));
-        Optional<ValidationError> errorOpt = validation.validateDateToInFuture(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
     }
 
