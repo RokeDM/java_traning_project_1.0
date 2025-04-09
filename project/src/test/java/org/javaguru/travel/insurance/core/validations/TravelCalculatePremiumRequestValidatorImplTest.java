@@ -1,6 +1,5 @@
-package org.javaguru.travel.insurance.core;
+package org.javaguru.travel.insurance.core.validations;
 
-import org.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import org.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -18,10 +17,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCalculatePremiumRequestValidatorTest {
+public class TravelCalculatePremiumRequestValidatorImplTest {
 
     @InjectMocks
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidatorImpl Validator;
 
     @Test
     public void shouldNotReturnErrors() {
@@ -33,8 +32,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<TravelRequestValidation> travelValidations = List.of(
                 validation1, validation2
         );
-        ReflectionTestUtils.setField(requestValidator, "travelValidations", travelValidations);
-        List<ValidationError> errors = requestValidator.validate(request);
+        ReflectionTestUtils.setField(Validator, "travelValidations", travelValidations);
+        List<ValidationError> errors = Validator.validate(request);
         assertTrue(errors.isEmpty());
     }
 
@@ -48,8 +47,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<TravelRequestValidation> travelValidations = List.of(
                 validation1, validation2
         );
-        ReflectionTestUtils.setField(requestValidator, "travelValidations", travelValidations);
-        List<ValidationError> errors = requestValidator.validate(request);
+        ReflectionTestUtils.setField(Validator, "travelValidations", travelValidations);
+        List<ValidationError> errors = Validator.validate(request);
         assertEquals(errors.size(), 2);
     }
 }

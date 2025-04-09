@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,7 +19,7 @@ class AgreementDateFromValidationTest {
     private AgreementDateFromValidation validation = new AgreementDateFromValidation();
 
     @Test
-    void shouldReturnErrorWhenAgreementDateFromIsNull() {
+    public void shouldReturnErrorWhenAgreementDateFromIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
         Optional<ValidationError> errorOpt = validation.execute(request);
@@ -30,7 +29,7 @@ class AgreementDateFromValidationTest {
     }
 
     @Test
-    void shouldNotReturnErrorWhenAgreementDateFromIsPresent() {
+    public void shouldNotReturnErrorWhenAgreementDateFromIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2025"));
         Optional<ValidationError> errorOpt = validation.execute(request);
