@@ -6,6 +6,8 @@ import org.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequ
 import org.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.javaguru.travel.insurance.dto.ValidationError;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -15,15 +17,25 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumServiceImpl.class);
+
     private final TravelCalculatePremiumRequestValidator requestValidator;
     private final TravelPremiumUnderwriting premiumUnderwriting;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+        logger.info("The calculation of the premium on request begins: {}", request);
+
         List<ValidationError> errors = requestValidator.validate(request);
-        return errors.isEmpty()
-                ? buildResponse(request, premiumUnderwriting.calculatePremium(request))
-                : buildResponse(errors);
+        if (!errors.isEmpty()) {
+            logger.warn("Validation errors found: {}", errors);
+            return buildResponse(errors);
+        }
+
+        BigDecimal premium = premiumUnderwriting.calculatePremium(request);
+        logger.info("The calculation is completed. The prize amounted to: {}", premium);
+
+        return buildResponse(request, premium);
     }
 
     private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
@@ -39,4 +51,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementPrice(premium);
         return response;
     }
+
+
 }
