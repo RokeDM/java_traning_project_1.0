@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
@@ -23,6 +22,6 @@ class TravelCalculatePremiumRequestValidatorImpl
                 .map(validation -> validation.execute(request))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -17,7 +17,7 @@ class DateTimeServiceTest {
         Date date1 = createDate("01.01.2025");
         Date date2 = createDate("01.01.2025");
         var daysBetween = dateTimeService.getDaysBetween(date1, date2);
-        assertEquals(daysBetween, 0);
+        assertEquals(daysBetween, 0L);
     }
 
     @Test
@@ -25,7 +25,7 @@ class DateTimeServiceTest {
         Date date1 = createDate("01.01.2025");
         Date date2 = createDate("09.01.2025");
         var daysBetween = dateTimeService.getDaysBetween(date1, date2);
-        assertEquals(daysBetween, 8);
+        assertEquals(daysBetween, 8L);
     }
 
     @Test
@@ -33,7 +33,7 @@ class DateTimeServiceTest {
         Date date1 = createDate("09.01.2025");
         Date date2 = createDate("01.01.2025");
         var daysBetween = dateTimeService.getDaysBetween(date1, date2);
-        assertEquals(daysBetween, -8);
+        assertEquals(daysBetween, -8L);
     }
 
     private Date createDate(String dateString) {
