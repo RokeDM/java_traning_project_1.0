@@ -27,7 +27,7 @@ class AgreementDateToValidationTest {
     @Test
     public void shouldReturnErrorWhenAgreementDateToIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(null);
+        when(request.getAgreementDateTo()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_4")).thenReturn(validationError);
         Optional<ValidationError> errorOpt = validation.execute(request);
