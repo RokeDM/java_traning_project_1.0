@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class TravelCalculatePremiumRequestValidatorImplTest {
 
     @InjectMocks
-    private TravelCalculatePremiumRequestValidatorImpl Validator;
+    private TravelCalculatePremiumRequestValidatorImpl validator;
 
     @Test
     public void shouldNotReturnErrors() {
@@ -32,8 +32,8 @@ public class TravelCalculatePremiumRequestValidatorImplTest {
         List<TravelRequestValidation> travelValidations = List.of(
                 validation1, validation2
         );
-        ReflectionTestUtils.setField(Validator, "travelValidations", travelValidations);
-        List<ValidationError> errors = Validator.validate(request);
+        ReflectionTestUtils.setField(validator, "travelValidations", travelValidations);
+        List<ValidationError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());
     }
 
@@ -47,8 +47,8 @@ public class TravelCalculatePremiumRequestValidatorImplTest {
         List<TravelRequestValidation> travelValidations = List.of(
                 validation1, validation2
         );
-        ReflectionTestUtils.setField(Validator, "travelValidations", travelValidations);
-        List<ValidationError> errors = Validator.validate(request);
+        ReflectionTestUtils.setField(validator, "travelValidations", travelValidations);
+        List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 2);
     }
 }

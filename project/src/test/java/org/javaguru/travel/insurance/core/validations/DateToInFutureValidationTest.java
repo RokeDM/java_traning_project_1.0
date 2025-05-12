@@ -14,37 +14,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DateToInFutureValidationTest {
 
     @Mock private DateTimeService dateTimeService;
+    @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks
-    DateToInFutureValidation validation;
+    private DateToInFutureValidation validation;
 
     @Test
-    void shouldReturnErrorWhenDateToIsInThePast() {
+    public void shouldReturnErrorWhenDateToIsInThePast() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("31.03.2025"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("01.04.2025"));
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_3")).thenReturn(validationError);
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getField(), "agreementDateTo");
-        assertEquals(errorOpt.get().getMessage(), "Must be in the future!");
+        assertSame(errorOpt.get(), validationError);
     }
 
     @Test
-    void shouldNotReturnErrorWhenAgreementDateToIsInTheFuture() {
+    public void shouldNotReturnErrorWhenAgreementDateToIsInTheFuture() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("01.04.2025"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("31.03.2025"));
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
+        verifyNoInteractions(errorFactory);
     }
 
     private Date createDate(String dateStr) {
