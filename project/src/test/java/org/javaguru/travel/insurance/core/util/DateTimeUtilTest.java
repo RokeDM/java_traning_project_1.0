@@ -1,4 +1,4 @@
-package org.javaguru.travel.insurance.core;
+package org.javaguru.travel.insurance.core.util;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,15 +8,15 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DateTimeServiceTest {
+class DateTimeUtilTest {
 
-    private DateTimeService dateTimeService = new DateTimeService();
+    private DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
     @Test
     void DaysBetweenZero() {
         Date date1 = createDate("01.01.2025");
         Date date2 = createDate("01.01.2025");
-        var daysBetween = dateTimeService.getDaysBetween(date1, date2);
+        var daysBetween = dateTimeUtil.getDaysBetween(date1, date2);
         assertEquals(daysBetween, 0L);
     }
 
@@ -24,7 +24,7 @@ class DateTimeServiceTest {
     void DaysBetweenPositive() {
         Date date1 = createDate("01.01.2025");
         Date date2 = createDate("09.01.2025");
-        var daysBetween = dateTimeService.getDaysBetween(date1, date2);
+        var daysBetween = dateTimeUtil.getDaysBetween(date1, date2);
         assertEquals(daysBetween, 8L);
     }
 
@@ -32,7 +32,7 @@ class DateTimeServiceTest {
     void DaysBetweenNegative() {
         Date date1 = createDate("09.01.2025");
         Date date2 = createDate("01.01.2025");
-        var daysBetween = dateTimeService.getDaysBetween(date1, date2);
+        var daysBetween = dateTimeUtil.getDaysBetween(date1, date2);
         assertEquals(daysBetween, -8L);
     }
 
