@@ -10,11 +10,12 @@ import java.math.BigDecimal;
 
 @Component
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-class TravelPremiumUnderwritingImpl {
+class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
 
     private final DateTimeUtil dateTimeUtil;
 
-    BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+    @Override
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         var daysBetween = dateTimeUtil.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
         return new BigDecimal(daysBetween);
     }
